@@ -91,7 +91,7 @@ class NerfModelSerializer(serializers.ModelSerializer):
 class NerfModelListSerializer(serializers.ModelSerializer):
     class Meta:
         model = NerfModel
-        fields = ['id', 'model_file', 'start_date', 'end_date', 'training_time']
+        fields = ['id', 'status', 'model_file', 'processed_data', 'start_date', 'end_date', 'training_time']
 
 # EXPORT METHOD
 from .models import ExportMethod

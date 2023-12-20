@@ -54,10 +54,11 @@ class DataUploadView(generics.CreateAPIView):
 
 class UserDataView(generics.ListAPIView):
     serializer_class = DataListSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Data.objects.filter(user=self.request.user)
+        user = User.objects.all()[0]
+        return Data.objects.filter(user=user)
 
 class DataDetailView(generics.RetrieveAPIView):
     queryset = Data.objects.all()
@@ -79,7 +80,7 @@ from .utils import generate_processed_data
 
 class GenerateProcessedDataView(generics.CreateAPIView):
     serializer_class = GenerateProcessedDataSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         processed_data = serializer.save(user=self.request.user)
@@ -87,10 +88,11 @@ class GenerateProcessedDataView(generics.CreateAPIView):
 
 class UserProcessedDataView(generics.ListAPIView):
     serializer_class = UserProcessedDataSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return ProcessedData.objects.filter(user=self.request.user)
+        user = User.objects.all()[0]
+        return ProcessedData.objects.filter(user=user)
 
 class ProcessedDataDetailView(generics.RetrieveAPIView):
     queryset = ProcessedData.objects.all()
@@ -112,7 +114,7 @@ from .serializers import NerfModelSerializer, GenerateNerfModelSerializer, NerfM
 from .utils import generate_nerf_model
 
 class GenerateNerfModelView(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     serializer_class = GenerateNerfModelSerializer
 
     def perform_create(self, serializer):
@@ -121,10 +123,11 @@ class GenerateNerfModelView(generics.CreateAPIView):
 
 class UserNerfModelsView(generics.ListAPIView):
     serializer_class = NerfModelListSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return NerfModel.objects.filter(user=self.request.user)
+        user = User.objects.all()[0]
+        return NerfModel.objects.filter(user=user)
 
 class NerfModelDetailView(generics.RetrieveAPIView):
     queryset = NerfModel.objects.all()
@@ -154,10 +157,11 @@ class GenerateNerfObjectView(generics.CreateAPIView):
 
 class UserNerfObjectsView(generics.ListAPIView):
     serializer_class = NerfObjectSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return NerfObject.objects.filter(user=self.request.user)
+        user = User.objects.all()[0]
+        return NerfObject.objects.filter(user=user)
 
 class NerfObjectDetailView(generics.RetrieveAPIView):
     queryset = NerfObject.objects.all()
